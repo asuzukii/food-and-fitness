@@ -1,10 +1,10 @@
-import Navbar from '@/components/Navbar';
-import './globals.css';
-import Footer from '@/components/Footer';
+import Navbar from "@/components/Navbar";
+import "./globals.css";
+import Footer from "@/components/Footer";
 export const metadata = {
-  title: 'Eat and Excercise',
-  description: 'Website for people who want to eat good food but still look good',
-}
+  title: "Eat and Excercise",
+  description: "Website for people who want to eat good food but still look good",
+};
 
 /**
  * Main Entry Point.
@@ -26,5 +26,5 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
-  )
+  );
 }

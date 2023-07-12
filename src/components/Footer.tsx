@@ -1,6 +1,6 @@
-import { footerLinks } from '@/constants'
-import Link from 'next/link'
-import Image from 'next/image'
+import { footerLinks } from "@/constants";
+import Link from "next/link";
+import Image from "next/image";
 
 type ColumnProps = {
   title: string;
@@ -18,7 +18,7 @@ const FooterColumn = ({ title, links }: ColumnProps) => (
       ))}
     </ul>
   </div>
-)
+);
 const Footer = () => {
   return (
     <section className="flexStart footer">
@@ -76,7 +76,7 @@ const Footer = () => {
         </p>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default Footer;
