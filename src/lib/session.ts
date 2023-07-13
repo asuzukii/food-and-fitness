@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   jwt: {
-    encode: ({secret, token}) => {
+    encode: ({ secret, token }) => {
       const encodedToken = jsonwebtoken.sign({
         ...token,
         iss: "grafbase",
@@ -23,7 +23,7 @@ export const authOptions: NextAuthOptions = {
       }, secret);
       return encodedToken;
     },
-    decode: async ({secret, token}) => {
+    decode: async ({ secret, token }) => {
       const decodedToken = jsonwebtoken.verify(token!, secret) as JWT;
       return decodedToken;
     },
