@@ -8,6 +8,8 @@ import CustomMenu from "./CustomMenu";
 import { categoryFilters } from "@/constants";
 import Button from "./Button";
 import { isSharedArrayBuffer } from "util/types";
+import { createNewProject, fetchToken } from "@/lib/actions";
+import { useRouter } from "next/navigation";
 
 type ProjectFormProps = {
   type: string,
@@ -15,10 +17,26 @@ type ProjectFormProps = {
 }
 
 const ProjectForm = ({ type, session }: ProjectFormProps ) => {
+  const router = useRouter();
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
 
+    const { token } = await fetchToken();
+    try {
+      if (type === "create") {
+        // create
+        await createNewProject(form, session?.user?.id, token);
+        router.push("/");
+      }
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setSubmitting(false);
+    }
   };
+
   const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
