@@ -123,5 +123,5 @@ export const updateProject =  async (
   };
 
   client.setHeader("Authorization", `Bearer ${token}`);
-  return makeGraphQLRequest(updateProjectMutation, { variables });
+  return makeGraphQLRequest(updateProjectMutation, variables);
 };
