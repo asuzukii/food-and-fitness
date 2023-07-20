@@ -19,6 +19,7 @@ const FooterColumn = ({ title, links }: ColumnProps) => (
     </ul>
   </div>
 );
+
 const Footer = () => {
   return (
     <section className="flexStart footer">
