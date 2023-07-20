@@ -10,19 +10,19 @@ export const revalidate = 0;
 
 type ProjectsSearch = {
   projectSearch: {
-    edges: { node: ProjectInterface }[];
+    edges: { node: ProjectInterface }[],
     pageInfo: {
       hasPreviousPage: boolean;
       hasNextPage: boolean;
       startCursor: string;
       endCursor: string;
-    }
+    },
   }
 }
 
 type SearchParams = {
-  category?: string | null,
-  endCursor?: string | null,
+  category?: string | undefined,
+  endCursor?: string | undefined,
 };
 
 type homeProps = {
