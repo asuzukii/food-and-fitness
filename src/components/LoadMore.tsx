@@ -18,11 +18,11 @@ const LoadMore = (
   const handleNavigation = (direction: string) => {
     const currentParams = new URLSearchParams(window.location.search);
     if (direction === "next" && hasNextPage) {
-      currentParams.delete("startcursor");
-      currentParams.set("endcursor", endCursor);
+      currentParams.delete("startCursor");
+      currentParams.set("endCursor", endCursor);
     } else if (direction === "first" && hasPreviousPage) {
-      currentParams.delete("endcursor");
-      currentParams.set("startcursor", startCursor);
+      currentParams.delete("endCursor");
+      currentParams.set("startCursor", startCursor);
     }
 
     const newSearchParams = currentParams.toString();

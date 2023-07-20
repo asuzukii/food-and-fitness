@@ -72,13 +72,13 @@ export const createNewProject = async (form: ProjectForm, creatorId: string, tok
   }
 };
 
-export const fetchAllProjects = async (category?: string | undefined, endcursor?: string | undefined) => {
+export const fetchAllProjects = async (category?: string | undefined, endCursor?: string | undefined) => {
   client.setHeader("x-api-key", apiKey);
   console.log("category", category);
-  console.log("endcursor", endcursor);
-  category = category ?? "";
-  endcursor = endcursor ?? "";
-  return makeGraphQLRequest(projectsQuery, { category, endcursor });
+  console.log("endcursor", endCursor);
+  // category = category ?? "";
+  // endcursor = endcursor ?? "";
+  return makeGraphQLRequest(projectsQuery, { category, endCursor });
 };
 
 export const getProjectDetails = (id: string) => {
