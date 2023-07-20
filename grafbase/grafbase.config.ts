@@ -12,6 +12,7 @@ import { g, auth, config } from "@grafbase/sdk";
 // Define Data Models
 // https://grafbase.com/docs/database
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const User = g.model("User", {
   name: g.string().length({ min: 2, max: 20 }),
@@ -25,7 +26,8 @@ const User = g.model("User", {
   rules.public().read();
 });
 
-// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore probs some any error that is prevented
 const Project = g.model("Project", {
   title: g.string().length({ min: 3 }),
   description: g.string().optional(),

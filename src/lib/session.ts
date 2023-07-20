@@ -67,8 +67,8 @@ export const authOptions: NextAuthOptions = {
           );
         }
         return true;
-      } catch (e: any) {
-        console.log(e);
+      } catch (err) {
+        console.log(err);
         return false;
       }
     },

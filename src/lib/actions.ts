@@ -1,7 +1,5 @@
-import CreateProject from "@/app/create-project/page";
 import { ProjectForm } from "@/common.types";
 import { createProjectMutation, createUserMutation, deleteProjectMutation, getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery, updateProjectMutation } from "@/graphql";
-import { Query } from "@grafbase/sdk/dist/src/query";
 import { GraphQLClient } from "graphql-request";
 
 const isProd = process.env.NODE_ENV === "production";
@@ -13,8 +11,9 @@ const client = new GraphQLClient(apiUrl);
 const makeGraphQLRequest = async (query: string, variables = {}) => {
   try {
     return await client.request(query, variables);
-  } catch (e) {
-    throw e;
+  } catch (err) {
+    console.log(err);
+    throw err;
   }
 };
 
@@ -37,8 +36,9 @@ export const fetchToken = async () => {
   try {
     const res = await fetch(`${serverUrl}/api/auth/token`);
     return res.json();
-  } catch (e) { 
-    throw e;
+  } catch (err) { 
+    console.log(err);
+    throw err;
   }
 };
 
@@ -49,8 +49,9 @@ export const uploadImage = async (imgPath: string) => {
       body: JSON.stringify({ path: imgPath })
     });
     return res.json();
-  } catch (e) {
-    throw e;
+  } catch (err) {
+    console.log(err);
+    throw err;
   }
 };
 
@@ -83,7 +84,7 @@ export const getProjectDetails = (id: string) => {
 
 export const getUserProjects = (id: string, last?: number) => {
   client.setHeader("x-api-key", apiKey);
-  return makeGraphQLRequest(getProjectsOfUserQuery, { id });
+  return makeGraphQLRequest(getProjectsOfUserQuery, { id, last });
 };
 
 export const deleteProject = (id: string, token: string) => {
@@ -97,9 +98,9 @@ export const updateProject =  async (
   const isBase64DataURL = (value: string) => {
     const base64Regex = /^data:image\/[a-z]+;base64,/;
     return base64Regex.test(value);
-  }
+  };
 
-  let updatedForm = {...form};
+  let updatedForm = { ...form };
   const isUploadingNewImage = isBase64DataURL(form.image);
   if (isUploadingNewImage) {
     try {
@@ -108,10 +109,11 @@ export const updateProject =  async (
         updatedForm = {
           ...form,
           image: imageUrl.url
-        }
+        };
       }
     } catch (err) {
-
+      console.log(err);
+      throw err;
     }
   }
 

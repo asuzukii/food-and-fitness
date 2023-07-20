@@ -33,6 +33,9 @@ const ProjectCard = ({
           className="w-full h-full object-cover rounded-2xl"
           alt="Project Image"
         />
+        <div className="hidden group-hover:flex profile_card-title">
+          <p className="w-full">{title}</p>
+        </div>
       </Link>
       <div className="flexBetween w-full px-2 mt-3 font-semibold text-sm">
         <Link

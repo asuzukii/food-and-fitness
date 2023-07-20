@@ -1,9 +1,9 @@
 "use client";
-import { deleteProject, fetchToken } from '@/lib/actions';
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react'
+import { deleteProject, fetchToken } from "@/lib/actions";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 const ProjectActions = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -14,11 +14,12 @@ const ProjectActions = ({ projectId }: { projectId: string }) => {
     const { token } = await fetchToken();
     try {
       await deleteProject(projectId, token);
-      router.push('/');
+      router.push("/");
     } catch (err) {
+      console.log(err);
       throw(err);
     }
-  }
+  };
 
   return (
     <>
@@ -46,7 +47,7 @@ const ProjectActions = ({ projectId }: { projectId: string }) => {
         />
       </button>
     </>
-  )
-}
+  );
+};
 
-export default ProjectActions
+export default ProjectActions;

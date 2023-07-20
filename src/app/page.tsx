@@ -4,7 +4,7 @@ import ProjectCard from "@/components/ProjectCard";
 import Categories from "@/components/Categories";
 import LoadMore from "@/components/LoadMore";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 export const revalidate = 0;
 
@@ -29,7 +29,7 @@ type homeProps = {
   searchParams: SearchParams,
 };
 
-const Home = async ({ searchParams: {category, endCursor}} : homeProps) => {
+const Home = async ({ searchParams: { category, endCursor }} : homeProps) => {
   const data = await fetchAllProjects(category, endCursor) as ProjectsSearch;
   
   const projectsToDisplay = data?.projectSearch?.edges || [];

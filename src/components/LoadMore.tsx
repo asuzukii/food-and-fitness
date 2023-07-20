@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import Button from './Button';
+import Button from "./Button";
 
 type LoadMoreProps = {
   startCursor: string,
@@ -16,8 +16,8 @@ const LoadMore = (
   const router = useRouter();
 
   const handleNavigation = (direction: string) => {
-    const currentParams = new URLSearchParams(window.location.search)
-    if (direction === 'next' && hasNextPage) {
+    const currentParams = new URLSearchParams(window.location.search);
+    if (direction === "next" && hasNextPage) {
       currentParams.delete("startcursor");
       currentParams.set("endcursor", endCursor);
     } else if (direction === "first" && hasPreviousPage) {
@@ -26,7 +26,7 @@ const LoadMore = (
     }
 
     const newSearchParams = currentParams.toString();
-    const newPathname = `${window.location.pathname}?${newSearchParams}`
+    const newPathname = `${window.location.pathname}?${newSearchParams}`;
     
     router.push(newPathname);
   };
@@ -36,17 +36,17 @@ const LoadMore = (
       {hasPreviousPage && (
         <Button
           title="First Page"
-          handleClick={() => handleNavigation('first')}
+          handleClick={() => handleNavigation("first")}
         />
       )}
       {hasNextPage && (
         <Button
           title="Next"
-          handleClick={() => handleNavigation('next')}
+          handleClick={() => handleNavigation("next")}
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default LoadMore
+export default LoadMore;

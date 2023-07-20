@@ -8,7 +8,7 @@ type RelatedProjectsProps = {
   projectId: string,
 };
 
-const RelatedProjects = async ({userId, projectId}: RelatedProjectsProps) => {
+const RelatedProjects = async ({ userId, projectId }: RelatedProjectsProps) => {
   const result = await getUserProjects(userId) as {
     user?: UserProfile
   };
@@ -58,7 +58,7 @@ const RelatedProjects = async ({userId, projectId}: RelatedProjectsProps) => {
         ))}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default RelatedProjects
+export default RelatedProjects;
