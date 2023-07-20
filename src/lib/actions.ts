@@ -76,9 +76,9 @@ export const fetchAllProjects = async (category?: string | undefined, endcursor?
   client.setHeader("x-api-key", apiKey);
   console.log("category", category);
   console.log("endcursor", endcursor);
-  const categoryGuaranteedString = category ?? "";
-  const endcursoryGuaranteedString = endcursor ?? "";
-  return makeGraphQLRequest(projectsQuery, { categoryGuaranteedString, endcursoryGuaranteedString });
+  category = category ?? "";
+  endcursor = endcursor ?? "";
+  return makeGraphQLRequest(projectsQuery, { category, endcursor });
 };
 
 export const getProjectDetails = (id: string) => {
