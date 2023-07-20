@@ -1,6 +1,6 @@
 "use client";
 
-import { SessionInterface } from "@/common.types";
+import { ProjectInterface, SessionInterface } from "@/common.types";
 import React, { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import FormField from "./FormField";
@@ -8,15 +8,16 @@ import CustomMenu from "./CustomMenu";
 import { categoryFilters } from "@/constants";
 import Button from "./Button";
 import { isSharedArrayBuffer } from "util/types";
-import { createNewProject, fetchToken } from "@/lib/actions";
+import { createNewProject, fetchToken, updateProject } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 
 type ProjectFormProps = {
   type: string,
   session: SessionInterface,
+  project?: ProjectInterface,
 }
 
-const ProjectForm = ({ type, session }: ProjectFormProps ) => {
+const ProjectForm = ({ type, session, project }: ProjectFormProps ) => {
   const router = useRouter();
 
   const handleFormSubmit = async (e: React.FormEvent) => {
@@ -25,10 +26,20 @@ const ProjectForm = ({ type, session }: ProjectFormProps ) => {
 
     const { token } = await fetchToken();
     try {
-      if (type === "create") {
-        // create
-        await createNewProject(form, session?.user?.id, token);
-        router.push("/");
+      switch (type) {
+        case "create": {
+          await createNewProject(form, session?.user?.id, token);
+          router.push("/");
+          break;
+        }
+        case "edit": {
+          await updateProject(project?.id as string, form, token);
+          router.push("/");
+          break;
+        }
+        default : {
+          console.log("should not run here");
+        }
       }
     } catch (e) {
       console.log(e);
@@ -66,12 +77,12 @@ const ProjectForm = ({ type, session }: ProjectFormProps ) => {
 
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
-    title: "",
-    description: "",
-    image: "",
-    liveSiteUrl: "",
-    githubUrl: "",
-    category: ""
+    title: project?.title || "",
+    description: project?.description || "",
+    image: project?.image || "",
+    liveSiteUrl: project?.liveSiteUrl || "",
+    githubUrl: project?.githubUrl || "",
+    category: project?.category || "",
   });
 
   return (
